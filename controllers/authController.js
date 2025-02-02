@@ -16,7 +16,8 @@ export const registerUser = async (req, res) => {
             return res.status(400).json({ message: "User already exists" });
         }
 
-        const user = await User.create({ username, email, password });
+        const user = new User({ username, email, password });
+        await user.save();
         if (user) {
             res.status(201).json({
                 _id: user._id,
@@ -28,6 +29,7 @@ export const registerUser = async (req, res) => {
             res.status(400).json({ message: "Invalid user data" });
         }
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: "Server error" });
     }
 };
@@ -49,6 +51,8 @@ export const loginUser = async (req, res) => {
             res.status(401).json({ message: "Invalid email or password" });
         }
     } catch (error) {
+        console.log(error);
+
         res.status(500).json({ message: "Server error" });
     }
 };

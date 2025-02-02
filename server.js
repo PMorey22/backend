@@ -2,7 +2,9 @@ import express from "express";
 import connectDB from "./config/db.js";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
-import cors from "cors"; // Import CORS
+import matchRoutes from "./routes/matchRoutes.js";  // New
+import messageRoutes from "./routes/messageRoutes.js";  // New
+import cors from "cors"; 
 
 dotenv.config();
 
@@ -15,17 +17,19 @@ app.use(express.json());
 app.use(cors({ 
     origin: "http://localhost:5173", // Allow requests from your frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true // Allow cookies if needed
+    credentials: true 
 }));
 
-app.use("/api/auth", authRoutes); // Use auth routes after CORS middleware
+app.use("/api/auth", authRoutes); 
+app.use("/api/matches", matchRoutes);  // New
+app.use("/api/messages", messageRoutes);  // New
 
 const PORT = process.env.PORT || 5000;
 
 // Connect Database
 connectDB()
   .then(() => {
-    console.log("Database connected successfully"); // Add log for confirmation
+    console.log("Database connected successfully");
   })
   .catch((err) => {
     console.error("Database connection error:", err);
@@ -34,10 +38,10 @@ connectDB()
 // Test Route
 app.get("/", (req, res) => {
   res.send("API is running...");
-  console.log("Received request at /"); // Debug log
+  console.log("Received request at /");
 });
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`); // Debug log
+  console.log(`Server running on port ${PORT}`);
 });
