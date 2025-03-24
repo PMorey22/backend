@@ -14,14 +14,11 @@ const app = express();
 app.use(express.json());
 
 // CORS configuration
-const cors = require('cors');
-
-app.use(cors({
-  origin: 'https://akhripasta-puce.vercel.app', // Allow only your frontend
-  methods: 'GET,POST,PUT,DELETE',
-  allowedHeaders: 'Content-Type,Authorization'
+app.use(cors({ 
+    origin: "https://akhripasta-puce.vercel.app/login", // Allow requests from your frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true 
 }));
-
 
 app.use("/api/auth", authRoutes); 
 app.use("/api/matches", matchRoutes);  // New
