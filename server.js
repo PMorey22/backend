@@ -15,9 +15,10 @@ app.use(express.json());
 
 // CORS configuration
 app.use(cors({ 
-    origin: "https://akhripasta-puce.vercel.app/login", // Allow requests from your frontend
+    origin: "https://akhripasta-puce.vercel.app", // Allow requests from your frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true 
+  credentials: true ,
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use("/api/auth", authRoutes); 
