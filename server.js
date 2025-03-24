@@ -15,7 +15,7 @@ app.use(express.json());
 
 // CORS configuration
 app.use(cors({ 
-    origin: "http://localhost:5173", // Allow requests from your frontend
+    origin: "https://akhripasta-pcge8vi3o-purvas-projects-dbbac4aa.vercel.app", // Allow requests from your frontend
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true 
 }));
